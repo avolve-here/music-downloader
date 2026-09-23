@@ -1,0 +1,780 @@
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+html {
+    scroll-behavior: smooth;
+}
+
+
+body {
+    font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Helvetica,
+        Arial,
+        sans-serif;
+
+    background: #202322;
+    color: #f4f7f5;
+
+    min-height: 100vh;
+}
+
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+main {
+    min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero {
+    min-height: 64vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 55px 24px 60px;
+
+    background:
+        radial-gradient(
+            circle at 50% 0%,
+            rgba(30, 215, 96, 0.09),
+            transparent 48%
+        ),
+        #202322;
+}
+
+
+.hero-content {
+    width: 100%;
+    max-width: 820px;
+
+    text-align: center;
+}
+
+
+/* =========================================================
+   HERO TITLE
+========================================================= */
+
+.hero h1 {
+    margin-top: 0;
+
+    font-size: clamp(40px, 5.5vw, 58px);
+
+    line-height: 1;
+
+    letter-spacing: -0.055em;
+
+    font-weight: 750;
+}
+
+
+.hero h1 span {
+    display: block;
+
+    color: #1ed760;
+}
+
+
+/* =========================================================
+   HERO DESCRIPTION
+========================================================= */
+
+.hero-description {
+    max-width: 500px;
+
+    margin: 22px auto 0;
+
+    color: #9ba39f;
+
+    font-size: 16px;
+
+    line-height: 1.55;
+}
+
+
+/* =========================================================
+   DOWNLOAD BOX
+========================================================= */
+
+.download-box {
+    width: 100%;
+    max-width: 620px;
+
+    margin: 28px auto 0;
+
+    padding: 5px;
+
+    display: flex;
+    align-items: center;
+
+    background: #292c2b;
+
+    border: 1px solid #393d3b;
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 12px 30px rgba(0, 0, 0, 0.18);
+}
+
+
+.download-box input {
+    flex: 1;
+
+    min-width: 0;
+
+    height: 44px;
+
+    padding: 0 16px;
+
+    border: none;
+    outline: none;
+
+    background: transparent;
+
+    color: #f4f7f5;
+
+    font-size: 14px;
+}
+
+
+.download-box input::placeholder {
+    color: #6f7873;
+}
+
+
+.download-box button {
+    height: 44px;
+
+    padding: 0 16px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        opacity 0.2s ease;
+}
+
+
+#pasteButton {
+    margin-right: 5px;
+
+    background: #242b28;
+
+    color: #c4cbc7;
+}
+
+
+#pasteButton:hover {
+    background: #2c3531;
+}
+
+
+#analyzeButton {
+    background: #1ed760;
+
+    color: #071109;
+}
+
+
+#analyzeButton:hover {
+    background: #24e06a;
+
+    transform: translateY(-1px);
+}
+
+
+#analyzeButton:disabled {
+    opacity: 0.6;
+
+    cursor: wait;
+
+    transform: none;
+}
+
+
+.download-box button:active {
+    transform: translateY(1px);
+}
+
+
+/* =========================================================
+   INPUT NOTE
+========================================================= */
+
+.input-note {
+    min-height: 20px;
+
+    margin-top: 10px;
+
+    color: #ff6b6b;
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   SUPPORTED
+========================================================= */
+
+.supported {
+    margin-top: 12px;
+
+    color: #68716c;
+
+    font-size: 11px;
+
+    letter-spacing: 0.08em;
+}
+
+
+/* =========================================================
+   RESULTS
+========================================================= */
+
+.results {
+    padding: 10px 24px 55px;
+
+    background: #252827;
+
+    border-top: 1px solid #343836;
+}
+
+
+.results-container {
+    width: 100%;
+    max-width: 820px;
+
+    margin: 0 auto;
+}
+
+
+/* =========================================================
+   RESULTS HEADER
+========================================================= */
+
+.results-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    max-width: 760px;
+
+    margin: 0 auto 18px;
+}
+
+
+.results-header > div > span {
+    color: #1ed760;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    letter-spacing: 0.14em;
+}
+
+
+.results-header h2 {
+    margin-top: 5px;
+
+    color: #f4f7f5;
+
+    font-size: 25px;
+
+    line-height: 1.1;
+
+    letter-spacing: -0.035em;
+}
+
+
+.close-results {
+    width: 34px;
+    height: 34px;
+
+    border: 1px solid #303834;
+
+    border-radius: 50%;
+
+    background: #1b201e;
+
+    color: #aeb6b1;
+
+    font-size: 20px;
+
+    font-weight: 300;
+
+    line-height: 1;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease;
+}
+
+
+.close-results:hover {
+    background: #1ed760;
+
+    color: #071109;
+
+    border-color: #1ed760;
+}
+
+
+/* =========================================================
+   TRACK CARD
+========================================================= */
+
+.track-card {
+    overflow: hidden;
+
+    max-width: 760px;
+
+    margin: 0 auto;
+
+    border: 1px solid #343a37;
+
+    border-radius: 16px;
+
+    background: #202422;
+
+    box-shadow:
+        0 12px 30px rgba(0, 0, 0, 0.18);
+}
+
+
+/* =========================================================
+   TRACK INFO
+========================================================= */
+
+.track-info {
+    display: flex;
+    align-items: center;
+
+    gap: 16px;
+
+    padding: 16px 18px;
+}
+
+
+.track-thumbnail {
+    width: 78px;
+    height: 78px;
+
+    flex-shrink: 0;
+
+    object-fit: cover;
+
+    border-radius: 11px;
+
+    background: #252b28;
+
+    box-shadow:
+        0 6px 18px rgba(0, 0, 0, 0.25);
+}
+
+
+.track-details h3 {
+    color: #f4f7f5;
+
+    font-size: 19px;
+
+    line-height: 1.15;
+
+    letter-spacing: -0.035em;
+}
+
+
+.track-details p {
+    margin-top: 5px;
+
+    color: #89928d;
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   DOWNLOAD OPTIONS
+========================================================= */
+
+.download-options {
+    padding: 16px 18px;
+
+    border-top: 1px solid #343a37;
+
+    background: #1d211f;
+}
+
+
+.option-heading h3 {
+    color: #f4f7f5;
+
+    font-size: 15px;
+
+    letter-spacing: -0.02em;
+}
+
+
+.option-heading span {
+    display: block;
+
+    margin-top: 4px;
+
+    color: #77807b;
+
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   DOWNLOAD CONTROLS
+========================================================= */
+
+.download-controls {
+    display: flex;
+
+    gap: 8px;
+
+    margin-top: 13px;
+}
+
+
+.download-controls select {
+    height: 44px;
+
+    padding: 0 12px;
+
+    border: 1px solid #303834;
+
+    border-radius: 9px;
+
+    outline: none;
+
+    background: #252a27;
+
+    color: #dce2df;
+
+    font-size: 12px;
+
+    cursor: pointer;
+}
+
+
+.download-controls select:focus {
+    border-color: #1ed760;
+}
+
+
+#audioFormat {
+    width: 110px;
+}
+
+
+#audioBitrate {
+    width: 125px;
+}
+
+
+#downloadButton {
+    flex: 1;
+
+    height: 44px;
+
+    border: none;
+
+    border-radius: 9px;
+
+    background: #1ed760;
+
+    color: #071109;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+#downloadButton:hover {
+    background: #24e06a;
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer {
+    margin-top: auto;
+
+    padding: 22px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 18px;
+
+    border-top: 1px solid #303532;
+
+    background: #202322;
+
+    color: #7c8580;
+
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   RESPONSIVE — TABLET
+========================================================= */
+
+@media (max-width: 700px) {
+
+    .hero {
+        min-height: 62vh;
+
+        padding: 50px 18px;
+    }
+
+
+    .hero h1 {
+        font-size: clamp(44px, 13vw, 65px);
+    }
+
+
+    .hero-description {
+        font-size: 15px;
+    }
+
+
+    .download-box {
+        flex-wrap: wrap;
+
+        padding: 7px;
+    }
+
+
+    .download-box input {
+        width: 100%;
+
+        flex-basis: 100%;
+
+        height: 44px;
+    }
+
+
+    #pasteButton,
+    #analyzeButton {
+        flex: 1;
+
+        margin-top: 5px;
+    }
+
+
+    #pasteButton {
+        margin-right: 3px;
+    }
+
+
+    #analyzeButton {
+        margin-left: 3px;
+    }
+
+
+    .results {
+        padding: 38px 18px 50px;
+    }
+
+
+    .results-header {
+        margin-bottom: 16px;
+    }
+
+
+    .results-header h2 {
+        font-size: 23px;
+    }
+
+
+    .track-info {
+        padding: 15px 16px;
+
+        gap: 14px;
+    }
+
+
+    .track-thumbnail {
+        width: 72px;
+        height: 72px;
+    }
+
+
+    .track-details h3 {
+        font-size: 18px;
+    }
+
+
+    .download-options {
+        padding: 15px 16px;
+    }
+
+
+    .download-controls {
+        flex-wrap: wrap;
+    }
+
+
+    .download-controls select {
+        flex: 1;
+
+        min-width: 120px;
+    }
+
+
+    #downloadButton {
+        flex-basis: 100%;
+    }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE — MOBILE
+========================================================= */
+
+@media (max-width: 480px) {
+
+    .hero {
+        min-height: 60vh;
+
+        padding-top: 40px;
+    }
+
+
+    .hero h1 {
+        font-size: 40px;
+    }
+
+
+    .hero-description {
+        margin-top: 18px;
+
+        font-size: 14px;
+    }
+
+
+    .download-box {
+        margin-top: 27px;
+    }
+
+
+    .download-box input {
+        font-size: 13px;
+    }
+
+
+    .download-box button {
+        font-size: 12px;
+
+        padding: 0 13px;
+    }
+
+
+    .results-header h2 {
+        font-size: 22px;
+    }
+
+
+    .track-info {
+        gap: 12px;
+    }
+
+
+    .track-thumbnail {
+        width: 65px;
+        height: 65px;
+
+        border-radius: 9px;
+    }
+
+
+    .track-details h3 {
+        font-size: 16px;
+    }
+
+
+    .track-details p {
+        font-size: 12px;
+    }
+
+
+    .download-controls {
+        display: grid;
+
+        grid-template-columns: 1fr 1fr;
+    }
+
+
+    .download-controls select {
+        width: 100%;
+
+        min-width: 0;
+    }
+
+
+    #downloadButton {
+        width: 100%;
+    }
+
+
+    footer {
+        flex-direction: column;
+
+        gap: 6px;
+    }
+
+}

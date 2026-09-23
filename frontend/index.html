@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Music Downloader — Download Spotify Music
+    </title>
+
+    <meta
+        name="description"
+        content="Download music from Spotify links in your preferred audio format."
+    >
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+
+<body>
+
+    <main>
+
+        <!-- ==================================================
+                HERO
+        =================================================== -->
+
+        <section class="hero">
+
+            <div class="hero-content">
+
+                
+
+
+                <h1>
+    Download your
+    <span>songs.</span>
+</h1>
+
+
+<p class="hero-description">
+
+    Paste a Spotify link. Choose your format. Download.
+
+</p>
+
+
+                <!-- DOWNLOAD BOX -->
+
+                <div class="download-box">
+
+                    <input
+                        type="text"
+                        id="spotifyUrl"
+                        placeholder="Paste Spotify track, album or playlist URL..."
+                        autocomplete="off"
+                    >
+
+
+                    <button
+                        type="button"
+                        id="pasteButton"
+                    >
+                        Paste
+                    </button>
+
+
+                    <button
+                        type="button"
+                        id="analyzeButton"
+                    >
+                        Analyze
+                    </button>
+
+                </div>
+
+
+                <p
+                    class="input-note"
+                    id="inputNote"
+                ></p>
+
+
+                <div class="supported">
+
+                    <span>
+                        Spotify
+                    </span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==================================================
+             RESULTS
+        =================================================== -->
+
+        <section
+            class="results"
+            id="results"
+            style="display: none;"
+        >
+
+            <div class="results-container">
+
+
+                <div class="results-header">
+
+                    <div>
+
+                        <span>
+                            YOUR MUSIC
+                        </span>
+
+                        <h2>
+                            Ready to download
+                        </h2>
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        id="closeResults"
+                        class="close-results"
+                    >
+                        ×
+                    </button>
+
+                </div>
+
+
+                <!-- TRACK -->
+
+                <div class="track-card">
+
+
+                    <div class="track-info">
+
+                        <img
+                            src=""
+                            id="trackThumbnail"
+                            class="track-thumbnail"
+                            alt="Album artwork"
+                        >
+
+
+                        <div class="track-details">
+
+                            <h3
+                                id="trackTitle"
+                            >
+                                Track title
+                            </h3>
+
+
+                            <p
+                                id="trackArtist"
+                            >
+                                Artist
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- DOWNLOAD OPTIONS -->
+
+                    <div class="download-options">
+
+
+                        <div class="option-heading">
+
+                            <div>
+
+                                <h3>
+                                    Download
+                                </h3>
+
+                                <span>
+                                    Choose your audio format and quality.
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="download-controls">
+
+
+                            <select
+                                id="audioFormat"
+                            >
+
+                                <option value="mp3">
+                                    MP3
+                                </option>
+
+                                <option value="m4a">
+                                    M4A
+                                </option>
+
+                                <option value="opus">
+                                    Opus
+                                </option>
+
+                                <option value="ogg">
+                                    OGG
+                                </option>
+
+                                <option value="flac">
+                                    FLAC
+                                </option>
+
+                                <option value="wav">
+                                    WAV
+                                </option>
+
+                            </select>
+
+
+                            <select
+                                id="audioBitrate"
+                            >
+
+                                <option value="128k">
+                                    128 kbps
+                                </option>
+
+                                <option value="192k">
+                                    192 kbps
+                                </option>
+
+                                <option
+                                    value="320k"
+                                    selected
+                                >
+                                    320 kbps
+                                </option>
+
+                            </select>
+
+
+                            <button
+                                type="button"
+                                id="downloadButton"
+                            >
+                                Download
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==================================================
+             FOOTER
+        =================================================== -->
+
+        <footer>
+
+            <span>
+                Music Downloader
+            </span>
+
+            <span>
+                Free to use
+            </span>
+
+        </footer>
+
+    </main>
+
+
+    <script
+        src="script.js"
+    ></script>
+
+</body>
+
+</html>
