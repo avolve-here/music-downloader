@@ -1,6 +1,7 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 
 import os
@@ -8,6 +9,7 @@ import subprocess
 import uuid
 import requests
 import shutil
+import imageio_ffmpeg
 
 
 # =========================================================
@@ -16,7 +18,7 @@ import shutil
 
 app = FastAPI(
     title="Music Downloader API",
-    version="3.0.0"
+    version="3.1.0"
 )
 
 
@@ -46,6 +48,11 @@ BASE_DIR = os.path.dirname(
 DOWNLOADS_DIR = os.path.join(
     BASE_DIR,
     "downloads"
+)
+
+FRONTEND_DIR = os.path.join(
+    BASE_DIR,
+    "frontend"
 )
 
 os.makedirs(
@@ -138,10 +145,38 @@ def safe_bitrate(value: str):
 
 def find_ffmpeg():
 
+    # -----------------------------------------------------
+    # SYSTEM FFMPEG
+    # -----------------------------------------------------
+
     ffmpeg = shutil.which("ffmpeg")
 
     if ffmpeg:
         return ffmpeg
+
+
+    # -----------------------------------------------------
+    # IMAGEIO-FFMPEG
+    # -----------------------------------------------------
+
+    try:
+
+        ffmpeg = imageio_ffmpeg.get_ffmpeg_exe()
+
+        if ffmpeg and os.path.isfile(ffmpeg):
+            return ffmpeg
+
+    except Exception as error:
+
+        print(
+            "Unable to locate imageio FFmpeg:",
+            repr(error)
+        )
+
+
+    # -----------------------------------------------------
+    # LOCAL PROJECT PATHS
+    # -----------------------------------------------------
 
     possible_paths = [
 
@@ -176,10 +211,12 @@ def find_ffmpeg():
         )
     ]
 
+
     for path in possible_paths:
 
         if os.path.isfile(path):
             return path
+
 
     return None
 
@@ -224,6 +261,7 @@ def find_audio_file(directory: str):
             )
 
             if os.path.isfile(file_path):
+
                 return file_path
 
     return None
@@ -270,6 +308,7 @@ def process_download(
             "FFmpeg was not found."
         )
 
+
     print()
     print("========================================")
     print("Starting download")
@@ -290,25 +329,36 @@ def process_download(
         "source.%(ext)s"
     )
 
+
     command = [
-    "yt-dlp",
-    f"ytsearch1:{search_query}",
-    "--no-playlist",
-    "-f",
-    "bestaudio/best",
-    "--concurrent-fragments",
-    "16",
-    "--no-part",
-    "--no-overwrites",
-    "--output",
-    source_template
-]
+        "yt-dlp",
+
+        f"ytsearch1:{search_query}",
+
+        "--no-playlist",
+
+        "-f",
+        "bestaudio/best",
+
+        "--concurrent-fragments",
+        "16",
+
+        "--no-part",
+
+        "--no-overwrites",
+
+        "--output",
+        source_template
+    ]
+
 
     print("Downloading audio source...")
+
     print(
         "Command:",
         " ".join(command)
     )
+
 
     result = subprocess.run(
         command,
@@ -317,12 +367,24 @@ def process_download(
         timeout=600
     )
 
+
     if result.stdout:
-        print(result.stdout)
+
+        print(
+            result.stdout
+        )
+
 
     if result.stderr:
-        print("yt-dlp output:")
-        print(result.stderr)
+
+        print(
+            "yt-dlp output:"
+        )
+
+        print(
+            result.stderr
+        )
+
 
     if result.returncode != 0:
 
@@ -339,11 +401,13 @@ def process_download(
         output_dir
     )
 
+
     if not source_file:
 
         raise RuntimeError(
             "Audio source was downloaded but no file was found."
         )
+
 
     print(
         "Source audio:",
@@ -360,6 +424,7 @@ def process_download(
         + get_extension(audio_format)
     )
 
+
     final_path = os.path.join(
         output_dir,
         final_filename
@@ -371,10 +436,14 @@ def process_download(
     # -----------------------------------------------------
 
     ffmpeg_command = [
+
         ffmpeg,
+
         "-y",
+
         "-i",
         source_file,
+
         "-vn"
     ]
 
@@ -386,55 +455,71 @@ def process_download(
     if audio_format == "mp3":
 
         ffmpeg_command += [
+
             "-codec:a",
             "libmp3lame",
+
             "-b:a",
             bitrate
         ]
+
 
     elif audio_format == "m4a":
 
         ffmpeg_command += [
+
             "-codec:a",
             "aac",
+
             "-b:a",
             bitrate
         ]
+
 
     elif audio_format == "opus":
 
         ffmpeg_command += [
+
             "-codec:a",
             "libopus",
+
             "-b:a",
             bitrate
         ]
+
 
     elif audio_format == "ogg":
 
         ffmpeg_command += [
+
             "-codec:a",
             "libvorbis",
+
             "-b:a",
             bitrate
         ]
 
+
     elif audio_format == "flac":
 
         ffmpeg_command += [
+
             "-codec:a",
             "flac"
         ]
 
+
     elif audio_format == "wav":
 
         ffmpeg_command += [
+
             "-codec:a",
             "pcm_s16le"
         ]
 
 
     ffmpeg_command += [
+
         final_path
     ]
 
@@ -445,10 +530,12 @@ def process_download(
 
     print()
     print("Converting with FFmpeg...")
+
     print(
         "Command:",
         " ".join(ffmpeg_command)
     )
+
 
     conversion = subprocess.run(
         ffmpeg_command,
@@ -457,12 +544,24 @@ def process_download(
         timeout=600
     )
 
+
     if conversion.stdout:
-        print(conversion.stdout)
+
+        print(
+            conversion.stdout
+        )
+
 
     if conversion.stderr:
-        print("FFmpeg output:")
-        print(conversion.stderr)
+
+        print(
+            "FFmpeg output:"
+        )
+
+        print(
+            conversion.stderr
+        )
+
 
     if conversion.returncode != 0:
 
@@ -500,11 +599,22 @@ def process_download(
 @app.get("/")
 def root():
 
-    return {
-        "status": "online",
-        "service": "Music Downloader API",
-        "version": "3.0.0"
-    }
+    index_file = os.path.join(
+        FRONTEND_DIR,
+        "index.html"
+    )
+
+    if not os.path.isfile(index_file):
+
+        return {
+            "status": "online",
+            "service": "Music Downloader API",
+            "version": "3.1.0"
+        }
+
+    return FileResponse(
+        index_file
+    )
 
 
 # =========================================================
@@ -538,6 +648,7 @@ def analyze_music(
         response.raise_for_status()
 
         metadata = response.json()
+
 
     except requests.RequestException:
 
@@ -579,7 +690,7 @@ def analyze_music(
 
 
     # -----------------------------------------------------
-    # RETURN METADATA ONLY
+    # RETURN METADATA
     # -----------------------------------------------------
 
     return {
@@ -619,9 +730,8 @@ def download_music(
 
 
     # -----------------------------------------------------
-    # GET SPOTIFY METADATA AGAIN
+    # GET SPOTIFY METADATA
     # -----------------------------------------------------
-    # This happens only after the user clicks Download.
 
     try:
 
@@ -636,6 +746,7 @@ def download_music(
         response.raise_for_status()
 
         metadata = response.json()
+
 
     except requests.RequestException:
 
@@ -702,11 +813,16 @@ def download_music(
     try:
 
         file_path = process_download(
+
             search_query,
+
             output_dir,
+
             audio_format,
+
             bitrate
         )
+
 
     except subprocess.TimeoutExpired:
 
@@ -720,6 +836,7 @@ def download_music(
             detail="Download timed out."
         )
 
+
     except FileNotFoundError:
 
         shutil.rmtree(
@@ -732,6 +849,7 @@ def download_music(
             detail="yt-dlp was not found."
         )
 
+
     except RuntimeError as error:
 
         shutil.rmtree(
@@ -743,6 +861,7 @@ def download_music(
             status_code=500,
             detail=str(error)
         )
+
 
     except Exception as error:
 
@@ -775,4 +894,20 @@ def download_music(
         ),
 
         media_type="application/octet-stream"
+    )
+
+
+# =========================================================
+# STATIC FRONTEND
+# =========================================================
+
+if os.path.isdir(FRONTEND_DIR):
+
+    app.mount(
+        "/",
+        StaticFiles(
+            directory=FRONTEND_DIR,
+            html=True
+        ),
+        name="frontend"
     )
