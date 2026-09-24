@@ -11,12 +11,8 @@ import requests
 import shutil
 import imageio_ffmpeg
 
-# Make Deno available to yt-dlp on Render
-deno_path = os.path.expanduser("~/.deno/bin")
-
-if os.path.isdir(deno_path):
-    os.environ["PATH"] = deno_path + os.pathsep + os.environ.get("PATH", "")
-
+# Detect Node.js for yt-dlp JavaScript challenge solving
+NODE_PATH = shutil.which("node")
 
 # =========================================================
 # APP
@@ -336,12 +332,13 @@ def process_download(
     )
 
 
-    command = [
+    if not NODE_PATH:
+    raise RuntimeError("Node.js runtime was not found.")
+
+command = [
     "yt-dlp",
     "--js-runtimes",
-    "deno",
-    "--remote-components",
-    "ejs:npm",
+    f"node:{NODE_PATH}",
     f"ytsearch1:{search_query}",
     "--no-playlist",
     "-f",
