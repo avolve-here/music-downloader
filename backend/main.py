@@ -348,29 +348,28 @@ def process_download(
     # -----------------------------------------------------
 
     command = [
+    "yt-dlp",
 
-        "yt-dlp",
+    "--js-runtimes",
+    f"node:{node_path}",
 
-        "--js-runtimes",
-        f"node:{node_path}",
+    f"ytsearch1:{search_query}",
 
-        f"ytsearch1:{search_query}",
+    "--no-playlist",
 
-        "--no-playlist",
+    "-f",
+    "bestaudio/best",
 
-        "-f",
-        "bestaudio/best",
+    "--concurrent-fragments",
+    "16",
 
-        "--concurrent-fragments",
-        "16",
+    "--no-part",
 
-        "--no-part",
+    "--no-overwrites",
 
-        "--no-overwrites",
-
-        "--output",
-        source_template
-    ]
+    "--output",
+    source_template
+]
 
 
     print("Downloading audio source...")
