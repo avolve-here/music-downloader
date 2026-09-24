@@ -634,7 +634,7 @@ a {
 
 
 /* =========================================================
-   SCREENSHOT PLACEHOLDER
+   SCREENSHOTS
 ========================================================= */
 
 .screenshot-placeholder {
@@ -659,6 +659,268 @@ a {
     height: 100%;
 
     object-fit: cover;
+}
+
+
+/* =========================================================
+   LEGAL PAGES
+========================================================= */
+
+.legal-page {
+    background: #202321;
+}
+
+
+/* =========================================================
+   LEGAL CONTENT
+========================================================= */
+
+.legal-content {
+    padding: 72px 24px 90px;
+
+    background: #202321;
+}
+
+.legal-container {
+    width: 100%;
+    max-width: 850px;
+
+    margin: 0 auto;
+}
+
+
+/* =========================================================
+   LEGAL HEADING
+========================================================= */
+
+.legal-heading {
+    padding-bottom: 34px;
+
+    border-bottom: 1px solid #303532;
+}
+
+.legal-heading > span {
+    color: #1ed760;
+
+    font-size: 10px;
+    font-weight: 750;
+
+    letter-spacing: 0.15em;
+}
+
+.legal-heading h1 {
+    margin-top: 10px;
+
+    color: #f4f7f5;
+
+    font-size: clamp(38px, 6vw, 54px);
+    line-height: 1;
+
+    letter-spacing: -0.055em;
+}
+
+.legal-heading p {
+    margin-top: 13px;
+
+    color: #737c77;
+
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   LEGAL DOCUMENT
+========================================================= */
+
+.legal-document {
+    padding-top: 38px;
+}
+
+.legal-document p {
+    margin-top: 16px;
+
+    color: #9aa39e;
+
+    font-size: 13px;
+    line-height: 1.75;
+}
+
+.legal-document p:first-child {
+    margin-top: 0;
+}
+
+.legal-document h2 {
+    margin-top: 38px;
+
+    color: #f0f4f2;
+
+    font-size: 18px;
+    line-height: 1.25;
+
+    letter-spacing: -0.025em;
+}
+
+.legal-document ul {
+    margin-top: 15px;
+
+    padding-left: 20px;
+}
+
+.legal-document li {
+    margin-top: 9px;
+
+    padding-left: 4px;
+
+    color: #9aa39e;
+
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+.legal-document a {
+    color: #1ed760;
+
+    text-decoration: underline;
+    text-decoration-color: rgba(30, 215, 96, 0.35);
+    text-underline-offset: 3px;
+
+    transition:
+        color 0.2s ease,
+        text-decoration-color 0.2s ease;
+}
+
+.legal-document a:hover {
+    color: #24e06a;
+    text-decoration-color: #24e06a;
+}
+
+
+/* =========================================================
+   CONTACT PAGE
+========================================================= */
+
+.contact-document {
+    padding-top: 38px;
+}
+
+.contact-intro {
+    max-width: 700px;
+}
+
+.contact-intro p {
+    color: #9aa39e;
+
+    font-size: 14px;
+    line-height: 1.75;
+}
+
+.contact-cards {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 14px;
+
+    margin-top: 34px;
+}
+
+.contact-card {
+    padding: 22px;
+
+    background: #252927;
+
+    border: 1px solid #343a37;
+    border-radius: 13px;
+
+    transition:
+        border-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.contact-card:hover {
+    border-color: #414844;
+
+    transform: translateY(-2px);
+}
+
+.contact-label {
+    color: #1ed760;
+
+    font-size: 9px;
+    font-weight: 750;
+
+    letter-spacing: 0.14em;
+}
+
+.contact-card h2 {
+    margin-top: 12px;
+
+    color: #f0f4f2;
+
+    font-size: 17px;
+    line-height: 1.2;
+
+    letter-spacing: -0.025em;
+}
+
+.contact-card p {
+    margin-top: 9px;
+
+    color: #818a85;
+
+    font-size: 11px;
+    line-height: 1.6;
+}
+
+.contact-email {
+    display: inline-block;
+
+    margin-top: 18px;
+
+    color: #1ed760;
+
+    font-size: 11px;
+    font-weight: 650;
+
+    word-break: break-word;
+
+    transition: color 0.2s ease;
+}
+
+.contact-email:hover {
+    color: #24e06a;
+}
+
+.contact-note {
+    margin-top: 20px;
+    padding: 19px 20px;
+
+    background: #202422;
+
+    border: 1px solid #343a37;
+    border-radius: 11px;
+}
+
+.contact-note strong {
+    color: #e5eae7;
+
+    font-size: 12px;
+}
+
+.contact-note p {
+    margin-top: 7px;
+
+    color: #7f8883;
+
+    font-size: 11px;
+    line-height: 1.65;
+}
+
+.contact-note a {
+    color: #1ed760;
+
+    text-decoration: underline;
+    text-underline-offset: 3px;
 }
 
 
@@ -702,9 +964,29 @@ a {
 }
 
 .footer-main p {
+    margin-top: 5px;
+
     color: #68716c;
 
     font-size: 11px;
+}
+
+.footer-powered {
+    display: flex;
+
+    align-items: center;
+
+    gap: 5px;
+
+    color: #626b66;
+
+    font-size: 10px;
+}
+
+.footer-powered strong {
+    color: #1ed760;
+
+    font-weight: 700;
 }
 
 .footer-links {
@@ -834,6 +1116,14 @@ a {
 
     .screenshot-placeholder {
         max-width: 260px;
+    }
+
+    .contact-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .legal-content {
+        padding: 58px 18px 70px;
     }
 
     .footer-inner {
@@ -988,14 +1278,65 @@ a {
         margin-top: 15px;
     }
 
+    .legal-content {
+        padding: 48px 16px 58px;
+    }
+
+    .legal-heading {
+        padding-bottom: 27px;
+    }
+
+    .legal-heading h1 {
+        font-size: 37px;
+    }
+
+    .legal-heading p {
+        font-size: 10px;
+    }
+
+    .legal-document {
+        padding-top: 29px;
+    }
+
+    .legal-document h2 {
+        margin-top: 31px;
+
+        font-size: 16px;
+    }
+
+    .legal-document p,
+    .legal-document li {
+        font-size: 12px;
+    }
+
+    .contact-document {
+        padding-top: 29px;
+    }
+
+    .contact-intro p {
+        font-size: 12px;
+    }
+
+    .contact-card {
+        padding: 18px;
+    }
+
+    .contact-card h2 {
+        font-size: 16px;
+    }
+
     .footer-main {
         align-items: flex-start;
 
         flex-direction: column;
 
-        gap: 6px;
+        gap: 13px;
 
         padding-bottom: 20px;
+    }
+
+    .footer-powered {
+        font-size: 9px;
     }
 
     .footer-links {
