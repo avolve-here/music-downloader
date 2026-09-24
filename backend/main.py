@@ -11,8 +11,6 @@ import requests
 import shutil
 import imageio_ffmpeg
 
-# Detect Node.js for yt-dlp JavaScript challenge solving
-NODE_PATH = shutil.which("node")
 
 # =========================================================
 # APP
@@ -263,7 +261,6 @@ def find_audio_file(directory: str):
             )
 
             if os.path.isfile(file_path):
-
                 return file_path
 
     return None
@@ -311,6 +308,19 @@ def process_download(
         )
 
 
+    # -----------------------------------------------------
+    # FIND NODE.JS
+    # -----------------------------------------------------
+
+    node_path = shutil.which("node")
+
+    if not node_path:
+
+        raise RuntimeError(
+            "Node.js runtime was not found."
+        )
+
+
     print()
     print("========================================")
     print("Starting download")
@@ -318,12 +328,13 @@ def process_download(
     print("Format:", audio_format)
     print("Bitrate:", bitrate)
     print("FFmpeg:", ffmpeg)
+    print("Node.js:", node_path)
     print("========================================")
     print()
 
 
     # -----------------------------------------------------
-    # DOWNLOAD NATIVE AUDIO WITH YT-DLP
+    # SOURCE FILE
     # -----------------------------------------------------
 
     source_template = os.path.join(
@@ -332,17 +343,23 @@ def process_download(
     )
 
 
-if not NODE_PATH:
-    raise RuntimeError("Node.js runtime was not found.")
+    # -----------------------------------------------------
+    # DOWNLOAD NATIVE AUDIO WITH YT-DLP
+    # -----------------------------------------------------
 
-command = [
-    "yt-dlp",
-    "--js-runtimes",
-    f"node:{NODE_PATH}",
-    f"ytsearch1:{search_query}",
-    "--no-playlist",
-    "-f",
-    "bestaudio/best",
+    command = [
+
+        "yt-dlp",
+
+        "--js-runtimes",
+        f"node:{node_path}",
+
+        f"ytsearch1:{search_query}",
+
+        "--no-playlist",
+
+        "-f",
+        "bestaudio/best",
 
         "--concurrent-fragments",
         "16",
@@ -365,9 +382,13 @@ command = [
 
 
     result = subprocess.run(
+
         command,
+
         capture_output=True,
+
         text=True,
+
         timeout=600
     )
 
@@ -427,7 +448,6 @@ command = [
         "download."
         + get_extension(audio_format)
     )
-
 
     final_path = os.path.join(
         output_dir,
@@ -542,9 +562,13 @@ command = [
 
 
     conversion = subprocess.run(
+
         ffmpeg_command,
+
         capture_output=True,
+
         text=True,
+
         timeout=600
     )
 
@@ -642,10 +666,13 @@ def analyze_music(
     try:
 
         response = requests.get(
+
             "https://open.spotify.com/oembed",
+
             params={
                 "url": url
             },
+
             timeout=15
         )
 
@@ -657,7 +684,9 @@ def analyze_music(
     except requests.RequestException:
 
         raise HTTPException(
+
             status_code=400,
+
             detail="Unable to reach Spotify."
         )
 
@@ -678,7 +707,9 @@ def analyze_music(
     if not title:
 
         raise HTTPException(
+
             status_code=400,
+
             detail="Unable to identify the Spotify track."
         )
 
@@ -740,10 +771,13 @@ def download_music(
     try:
 
         response = requests.get(
+
             "https://open.spotify.com/oembed",
+
             params={
                 "url": url
             },
+
             timeout=15
         )
 
@@ -755,7 +789,9 @@ def download_music(
     except requests.RequestException:
 
         raise HTTPException(
+
             status_code=400,
+
             detail="Unable to reach Spotify."
         )
 
@@ -772,7 +808,9 @@ def download_music(
     if not title:
 
         raise HTTPException(
+
             status_code=400,
+
             detail="Unable to identify the Spotify track."
         )
 
@@ -831,12 +869,16 @@ def download_music(
     except subprocess.TimeoutExpired:
 
         shutil.rmtree(
+
             output_dir,
+
             ignore_errors=True
         )
 
         raise HTTPException(
+
             status_code=504,
+
             detail="Download timed out."
         )
 
@@ -844,12 +886,16 @@ def download_music(
     except FileNotFoundError:
 
         shutil.rmtree(
+
             output_dir,
+
             ignore_errors=True
         )
 
         raise HTTPException(
+
             status_code=500,
+
             detail="yt-dlp was not found."
         )
 
@@ -857,12 +903,16 @@ def download_music(
     except RuntimeError as error:
 
         shutil.rmtree(
+
             output_dir,
+
             ignore_errors=True
         )
 
         raise HTTPException(
+
             status_code=500,
+
             detail=str(error)
         )
 
@@ -874,13 +924,19 @@ def download_music(
         print(repr(error))
         print()
 
+
         shutil.rmtree(
+
             output_dir,
+
             ignore_errors=True
         )
 
+
         raise HTTPException(
+
             status_code=500,
+
             detail="Something went wrong while downloading the audio."
         )
 
@@ -908,10 +964,15 @@ def download_music(
 if os.path.isdir(FRONTEND_DIR):
 
     app.mount(
+
         "/",
+
         StaticFiles(
+
             directory=FRONTEND_DIR,
+
             html=True
         ),
+
         name="frontend"
     )
