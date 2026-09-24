@@ -331,14 +331,15 @@ def process_download(
 
 
     command = [
-        "yt-dlp",
-
-        f"ytsearch1:{search_query}",
-
-        "--no-playlist",
-
-        "-f",
-        "bestaudio/best",
+    "yt-dlp",
+    "--js-runtimes",
+    "deno",
+    "--remote-components",
+    "ejs:npm",
+    f"ytsearch1:{search_query}",
+    "--no-playlist",
+    "-f",
+    "bestaudio/best",
 
         "--concurrent-fragments",
         "16",
