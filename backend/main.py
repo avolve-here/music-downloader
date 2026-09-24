@@ -11,6 +11,12 @@ import requests
 import shutil
 import imageio_ffmpeg
 
+# Make Deno available to yt-dlp on Render
+deno_path = os.path.expanduser("~/.deno/bin")
+
+if os.path.isdir(deno_path):
+    os.environ["PATH"] = deno_path + os.pathsep + os.environ.get("PATH", "")
+
 
 # =========================================================
 # APP
