@@ -332,7 +332,7 @@ def process_download(
     )
 
 
-    if not NODE_PATH:
+if not NODE_PATH:
     raise RuntimeError("Node.js runtime was not found.")
 
 command = [
