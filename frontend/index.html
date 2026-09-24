@@ -10,48 +10,66 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>
-        Music Downloader — Download Spotify Music
-    </title>
+    <title>Music Downloader — Download Spotify Music</title>
 
     <meta
-    name="description"
-    content="Download music from Spotify links in your preferred audio format."
->
+        name="description"
+        content="Download music from Spotify links in your preferred audio format."
+    >
 
-<link rel="icon" type="image/png" href="favicon.png">
+    <link
+        rel="icon"
+        type="image/png"
+        href="favicon.png"
+    >
 
-<link rel="stylesheet" href="style.css">
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
 
 </head>
-
 
 <body>
 
     <main>
 
         <!-- ==================================================
-                HERO
+             HEADER
+        =================================================== -->
+
+        <header class="top-header">
+
+            <div class="top-header-inner">
+
+                <a
+                    href="#"
+                    class="nuvexa-brand"
+                >
+                    Nuvexa
+                </a>
+
+            </div>
+
+        </header>
+
+
+        <!-- ==================================================
+             HERO
         =================================================== -->
 
         <section class="hero">
 
             <div class="hero-content">
 
-                
-
-
                 <h1>
-    Download your
-    <span>songs.</span>
-</h1>
+                    Download your
+                    <span>songs.</span>
+                </h1>
 
-
-<p class="hero-description">
-
-    Paste a Spotify link. Choose your format. Download.
-
-</p>
+                <p class="hero-description">
+                    Paste a Spotify link. Choose your format. Download.
+                </p>
 
 
                 <!-- DOWNLOAD BOX -->
@@ -65,14 +83,12 @@
                         autocomplete="off"
                     >
 
-
                     <button
                         type="button"
                         id="pasteButton"
                     >
                         Paste
                     </button>
-
 
                     <button
                         type="button"
@@ -92,9 +108,11 @@
 
                 <div class="supported">
 
-                    <span>
-                        Spotify
-                    </span>
+                    <span>Spotify</span>
+                    <span>MP3</span>
+                    <span>M4A</span>
+                    <span>FLAC</span>
+                    <span>WAV</span>
 
                 </div>
 
@@ -115,7 +133,6 @@
 
             <div class="results-container">
 
-
                 <div class="results-header">
 
                     <div>
@@ -130,7 +147,6 @@
 
                     </div>
 
-
                     <button
                         type="button"
                         id="closeResults"
@@ -142,10 +158,7 @@
                 </div>
 
 
-                <!-- TRACK -->
-
                 <div class="track-card">
-
 
                     <div class="track-info">
 
@@ -156,19 +169,13 @@
                             alt="Album artwork"
                         >
 
-
                         <div class="track-details">
 
-                            <h3
-                                id="trackTitle"
-                            >
+                            <h3 id="trackTitle">
                                 Track title
                             </h3>
 
-
-                            <p
-                                id="trackArtist"
-                            >
+                            <p id="trackArtist">
                                 Artist
                             </p>
 
@@ -177,34 +184,24 @@
                     </div>
 
 
-                    <!-- DOWNLOAD OPTIONS -->
-
                     <div class="download-options">
-
 
                         <div class="option-heading">
 
-                            <div>
+                            <h3>
+                                Download
+                            </h3>
 
-                                <h3>
-                                    Download
-                                </h3>
-
-                                <span>
-                                    Choose your audio format and quality.
-                                </span>
-
-                            </div>
+                            <span>
+                                Choose your audio format and quality.
+                            </span>
 
                         </div>
 
 
                         <div class="download-controls">
 
-
-                            <select
-                                id="audioFormat"
-                            >
+                            <select id="audioFormat">
 
                                 <option value="mp3">
                                     MP3
@@ -233,9 +230,7 @@
                             </select>
 
 
-                            <select
-                                id="audioBitrate"
-                            >
+                            <select id="audioBitrate">
 
                                 <option value="128k">
                                     128 kbps
@@ -274,27 +269,211 @@
 
 
         <!-- ==================================================
+             HOW IT WORKS
+        =================================================== -->
+
+        <section class="how-it-works">
+
+            <div class="how-container">
+
+                <div class="section-heading">
+
+                    <span>
+                        HOW IT WORKS
+                    </span>
+
+                    <h2>
+                        Download your music in three steps.
+                    </h2>
+
+                    <p>
+                        Follow these simple steps to download your music.
+                    </p>
+
+                </div>
+
+
+                <div class="steps">
+
+                    <!-- STEP 01 -->
+
+                    <article class="step">
+
+                        <div class="step-number">
+                            01
+                        </div>
+
+                        <div class="step-content">
+
+                            <h3>
+                                Copy the link
+                            </h3>
+
+                            <p>
+                                Open Spotify and copy the link of the track, album or playlist you want.
+                            </p>
+
+
+                            <div class="screenshot-placeholder">
+
+                                <img
+                                    src="images/how-to-copy-link.png"
+                                    alt="How to copy a Spotify link"
+                                >
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- STEP 02 -->
+
+                    <article class="step">
+
+                        <div class="step-number">
+                            02
+                        </div>
+
+                        <div class="step-content">
+
+                            <h3>
+                                Paste the link
+                            </h3>
+
+                            <p>
+                                Paste your Spotify link into the box above and click Analyze.
+                            </p>
+
+
+                            <div class="screenshot-placeholder">
+
+                                <img
+                                    src="images/how-to-paste-link.png"
+                                    alt="How to paste a Spotify link"
+                                >
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- STEP 03 -->
+
+                    <article class="step">
+
+                        <div class="step-number">
+                            03
+                        </div>
+
+                        <div class="step-content">
+
+                            <h3>
+                                Choose & download
+                            </h3>
+
+                            <p>
+                                Choose your preferred format and quality, then click Download.
+                            </p>
+
+
+                            <div class="screenshot-placeholder">
+
+                                <img
+                                    src="images/how-to-download.png"
+                                    alt="How to download the music"
+                                >
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==================================================
              FOOTER
         =================================================== -->
 
-        <footer>
+        <footer class="site-footer">
 
-            <span>
-                Music Downloader
-            </span>
+            <div class="footer-inner">
 
-            <span>
-                Free to use
-            </span>
+                <div class="footer-main">
+
+                    <div class="footer-brand">
+                        Music Downloader
+                    </div>
+
+                    <p>
+                        Simple, fast and free.
+                    </p>
+
+                </div>
+
+
+                <div class="footer-links">
+
+                    <a href="#">
+                        Privacy
+                    </a>
+
+                    <a href="#">
+                        Terms
+                    </a>
+
+                    <a href="#">
+                        DMCA / Copyright
+                    </a>
+
+                    <a href="#">
+                        Acceptable Use
+                    </a>
+
+                    <a href="#">
+                        Cookie Policy
+                    </a>
+
+                    <a href="#">
+                        Disclaimer
+                    </a>
+
+                    <a href="#">
+                        Contact
+                    </a>
+
+                </div>
+
+
+                <div class="footer-bottom">
+
+                    <span>
+                        © 2026 Nuvexa. All rights reserved.
+                    </span>
+
+                    <span>
+                        Free to use
+                    </span>
+
+                </div>
+
+            </div>
 
         </footer>
 
     </main>
 
 
-    <script
-        src="script.js"
-    ></script>
+    <script src="script.js"></script>
 
 </body>
 
